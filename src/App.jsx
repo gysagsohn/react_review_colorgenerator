@@ -11,9 +11,9 @@ function App() {
       {/* www.somedomainname.com/ */}
       {/* www.somedomainname.com */}
       <Route path="/" element={<Template />} >
-        <Route index element={<HomePage />} />
-        {/* <Route path="generator" element ={<GeneratorPage />} />
-        <Route path="generator/saved" element={SavedThemesPage />} /> */}
+        {/* <Route index element={<HomePage />} /> */}
+        <Route path="generator" element ={<GeneratorPage />} />
+        {/* <Route path="generator/saved" element={SavedThemesPage />} />   */}
       </Route>
     </Routes>
   );

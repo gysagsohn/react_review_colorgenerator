@@ -15,17 +15,14 @@ This was the Term 3 Week 8 lectures, where after we learnt all of the materials 
 
 ## Contexts
 
-- Base Colour
+- Base CSS theme
     - hex colour of new theme
-- Localstorage manager for list of CSS theme
-    - Array of Theme List
-- Localstorage manager for current CSS theme
-    - One theme list
-- List of CSS themes
-    Array of Theme Lists
 - Current CSS theme
-    - One Theme List
-
+    - one theme list
+    - localstorage
+- List of CSS themes
+    - array of theme list
+    - localstorage
 
 ## Data
 
