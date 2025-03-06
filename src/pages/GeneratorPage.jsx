@@ -1,26 +1,46 @@
-import { useEffect, useState } from "react"
+import { Sketch } from "@uiw/react-color";
+import { useEffect, useState } from "react";
+import { ColourBlock } from "../components/ColourBlock";
+import { useBaseColourGlobalData, useBaseColourGlobalDispatch } from "../contexts/baseColourContext";
+import { useCurrentThemeData } from "../contexts/currentThemeContext";
+
 
 
 export default function GeneratorPage(){
 
-    // Base colour from form
-    let [initialBaseColour, setInitialBaseColour] = useState("#000000");
+	// Base colour from form 
+	let [formBaseColour, setFormBaseColour] = useState("#000000");
 
-    // Base colour from global state
-    let baseColourGlobal = useBaseColourGlobalData();
-    let setBaseColourGlobal = useBaseColourGlobalDispatch();
+	// Base colour from global state 
+	let baseColourGlobal = useBaseColourGlobalData();
+	// let baseColourGlobalRaw = useContext(BaseColourGlobalDataContext);
+	let setBaseColourGlobal = useBaseColourGlobalDispatch();
 
-    // On component mount, set local form value to global state value
-    useEffect(() => {
-        setFormBaseColour(baseColourGlobal);
-    }, []);
+	let currentTheme = useCurrentThemeData();
 
-    return(
-        <div>
-            {/* Base colour input form */}
 
-            {/* CSS theme generator componet */}
-        </div>
-    )
+	// On component mount, set local form value to global state value 
+	useEffect(() => {
+		setFormBaseColour(baseColourGlobal);
+	}, [baseColourGlobal]);
 
-};
+	useEffect(() => {
+		setBaseColourGlobal(formBaseColour);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [formBaseColour]);
+
+	return(
+		<div>
+			{/* Base colour input form */}
+			<h1>{formBaseColour}</h1>
+			{/* <input type="color" name="" id="" /> */}
+			<Sketch color={formBaseColour} onChange={(colour) => setFormBaseColour(colour.hex)} />
+
+			{/* CSS theme display component  */}
+			{currentTheme.colours?.map((colourEntry, index) => {
+				return <ColourBlock key={currentTheme.name + index} colourEntry={colourEntry} />
+			})}
+		</div>
+	)
+
+}
