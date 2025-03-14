@@ -59,7 +59,7 @@ export function generateTones(baseColour, themeName = ""){
 		}
 	});
 
-	finalizedOutput.colours = formattedColoursList;
+	finalizedOutput.colours = formattedColoursList; 
 
 	return finalizedOutput;
 }
