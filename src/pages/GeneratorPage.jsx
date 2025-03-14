@@ -4,8 +4,10 @@ import PureModal from 'react-pure-modal';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import { ColourBlock } from "../components/ColourBlock";
 import { CssCodeExport } from "../components/CssCodeExport";
+import { PreviewCard } from "../components/PreviewComponent";
 import { useBaseColourGlobalData, useBaseColourGlobalDispatch } from "../contexts/baseColourContext";
 import { useCurrentThemeData } from "../contexts/currentThemeContext";
+import "../styles/GeneratorPage.css";
 
 export default function GeneratorPage(){
 
@@ -19,7 +21,8 @@ export default function GeneratorPage(){
 	let currentTheme = useCurrentThemeData();
 
 	// Base colour from form 
-	let [formBaseColour, setFormBaseColour] = useState("#000000");
+	let [formBaseColour, setFormBaseColour] = useState(baseColourGlobal);
+
 
 	// On component mount, set local form value to global state value 
 	useEffect(() => {
@@ -31,8 +34,6 @@ export default function GeneratorPage(){
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formBaseColour]);
 
-	console.log("Current Theme:", currentTheme);
-
 	return(
 		<div>
 			<PureModal
@@ -43,28 +44,50 @@ export default function GeneratorPage(){
 					</div>
 				}
 				isOpen={modal}
-				closeButton="close"
+				closeButton="X"
 				closeButtonPosition="bottom"
 				onClose={() => {
 					setModal(false);
 					return true;
 				}}
-				>
+			>
 				<CssCodeExport />
 			</PureModal>
-			<button onClick={() => setModal(!modal)}>
-				Export CSS variables
-			</button>
+			
 
+			<div className="row">
 			{/* Base colour input form */}
 			<h1>{formBaseColour}</h1>
 			{/* <input type="color" name="" id="" /> */}
 			<Sketch color={formBaseColour} onChange={(colour) => setFormBaseColour(colour.hex)} />
+			<button onClick={() => setModal(!modal)}>
+				Export CSS variables
+			</button>
+			</div>
 
+			<div className="row">
+			{/* CSS theme display component  */}
+			{currentTheme.colours?.map((colourEntry, index) => {
+				return <PreviewCard key={currentTheme.name + index} textColour="white" colourEntry={colourEntry} />
+			})}
+			</div>
+
+			<div className="row">
+			{/* CSS theme display component  */}
+			{currentTheme.colours?.map((colourEntry, index) => {
+				return <PreviewCard key={currentTheme.name + index} textColour="black" colourEntry={colourEntry} />
+			})}
+			</div>
+
+			<div className="row">
 			{/* CSS theme display component  */}
 			{currentTheme.colours?.map((colourEntry, index) => {
 				return <ColourBlock key={currentTheme.name + index} colourEntry={colourEntry} />
 			})}
+			</div>
+			
+
+			
 		</div>
 	)
 
