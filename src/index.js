@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { BaseColourProvider } from './contexts/baseColourContext.js';
 import { CurrentThemeProvider } from './contexts/currentThemeContext.js';
+import { DarkModeProvider } from './contexts/darkModeContext.js';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
 
@@ -13,7 +14,10 @@ root.render(
     <BrowserRouter>
         <BaseColourProvider>
           <CurrentThemeProvider>
-            <App />
+            <DarkModeProvider>
+              <App />
+            </DarkModeProvider>
+            
           </CurrentThemeProvider>
         </BaseColourProvider>
     </BrowserRouter>

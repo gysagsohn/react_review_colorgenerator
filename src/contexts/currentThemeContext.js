@@ -18,7 +18,7 @@ export function useCurrentThemeDispatch(){
 export function CurrentThemeProvider({children}){
 	let [currentTheme, setCurrentTheme] = useState([]);
 
-	let [currentThemeLocalStorage, setCurrentThemeLocalStorage] = useLocalStorage("css-currenttheme", []);
+	let [currentThemeLocalStorage, setCurrentThemeLocalStorage] = useLocalStorage("css-currenttheme", "[]");
 
 	let baseColour = useBaseColourGlobalData();
 
